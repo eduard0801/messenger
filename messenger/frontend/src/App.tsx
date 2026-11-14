@@ -42,8 +42,11 @@ function App() {
     if (token && user) {
       const s = io({ auth: { token } });
       setSocket(s);
-      return () => s.disconnect();
+      return () => {
+        s.disconnect();
+      };
     }
+    return undefined;
   }, [token, user]);
 
   const login = (newToken: string, newUser: User) => {
